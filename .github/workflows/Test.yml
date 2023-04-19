@@ -4,11 +4,22 @@ jobs:
   test:
     name: test
     runs-on: ubuntu-latest
-    container: ubuntu:latest # This image will be pulled from docker
-    steps: # TODO: ensure there does not already exist gh
+    # This image will be pulled from docker, 
+    # therefore, it will (likely) not include gh
+    container: ubuntu:latest
+    steps:
+      - name: Ensure gh is not installed
+        run: type -p gh >/dev/null && exit 1 || echo "looks good"
+
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Invoke
         uses: ./
+
       - name: Test
-        run: gh --help && env
+        shell: bash
+        run: |
+          gh --help && 
+          test $GH_REPO == ${{ github.repository }} && 
+          test $GH_TOKEN == ${{ github.token }} && env

@@ -1,0 +1,11 @@
+name: 'setup-gh'
+description: 'Setup Github CLI'
+runs:
+  using: "composite"
+  steps:
+    - name: Install gh
+      shell: bash
+      run: type -p gh >/dev/null || bash ./install-linux.sh
+    - name: Print gh version
+      shell: bash
+      run: gh --version

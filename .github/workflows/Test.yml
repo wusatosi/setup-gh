@@ -11,4 +11,4 @@ jobs:
       - name: Invoke
         uses: ./
       - name: Test
-        run: gh --help
+        run: gh --help && env

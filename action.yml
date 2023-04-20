@@ -16,13 +16,14 @@ runs:
   steps:
     - name: Install gh
       shell: bash
-      run: |
-        type -p gh >/dev/null || bash ./install-linux.sh
+      run: bash ./install-linux.sh
+
     - name: Set Environment Variables
       shell: bash
       run: |
         echo "GH_REPO=${{ inputs.repository }}" >> $GITHUB_ENV
         echo "GH_TOKEN=${{ inputs.token }}" >> $GITHUB_ENV
+
     - name: Print gh version
       shell: bash
       run: gh --version

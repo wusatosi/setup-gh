@@ -1,18 +1,22 @@
 name: 'setup-gh'
-description: 'Setup Github CLI'
+description: 'Setup Github CLI on workflows with custom linux container'
 
+branding:
+  icon: 'play-circle'
+  color: 'blue'
+  
 inputs:
   repository: 
-    description: "Repository setting for Github CLI"
+    description: 'Repository setting for Github CLI'
     required: false
     default: ${{ github.repository }}
   token:
-    description: "Authentication token setting for Github CLI"
+    description: 'Authentication token setting for Github CLI'
     required: false
     default: ${{ github.token }}
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
 
     # This is only triggered on Linux os, 

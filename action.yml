@@ -14,7 +14,13 @@ inputs:
 runs:
   using: "composite"
   steps:
+
+    # This is only triggered on Linux os, 
+    # as the only case for which we need to install gh is 
+    # when we use an custom container. 
+    # For which only Linux runner can config one.
     - name: Install gh
+      if: runner.os == 'Linux'
       shell: bash
       run: bash ./install-linux.sh
 

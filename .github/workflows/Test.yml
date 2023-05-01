@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  test:
-    name: test
+  Fresh-Install:
+    name: Fresh Install gh
     runs-on: ubuntu-latest
     # This image will be pulled from docker, 
     # therefore, it will (likely) not include gh
@@ -22,6 +22,28 @@ jobs:
       - name: Invoke
         uses: ./
 
+      - name: Test
+        shell: bash
+        run: |
+          gh --help && 
+          test $GH_REPO == ${{ github.repository }} && 
+          test $GH_TOKEN == ${{ github.token }} && env
+          
+  Already-Installed:
+    name: Test already installed gh
+
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+          
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Invoke
+        uses: ./
+        
       - name: Test
         shell: bash
         run: |

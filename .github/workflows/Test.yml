@@ -28,6 +28,10 @@ jobs:
           gh --help && 
           test $GH_REPO == ${{ github.repository }} && 
           test $GH_TOKEN == ${{ github.token }} && env
+      
+      - name: Use gh
+        shell: bash
+        run: gh issue comment 1 -b "Integration test commit ${{ github.workflow }} @ ${{ github.sha }}, fresh install"
           
   Already-Installed:
     name: Test already installed gh
@@ -50,3 +54,7 @@ jobs:
           gh --help && 
           test $GH_REPO == ${{ github.repository }} && 
           test $GH_TOKEN == ${{ github.token }} && env
+      
+      - name: Use gh
+        shell: bash
+        run: gh issue comment 1 -b "Integration test commit ${{ github.workflow }} @ ${{ github.sha }}, ${{ matrix.os }}"

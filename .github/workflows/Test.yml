@@ -22,7 +22,7 @@ jobs:
         run: type -p gh >/dev/null && exit 1 || echo "looks good"
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Invoke
         uses: ./
@@ -48,7 +48,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Invoke
         uses: ./
